@@ -6,3 +6,4 @@ class Filter_ultrasonic {
  private:
   double ping_value = 0.0;
 };
+

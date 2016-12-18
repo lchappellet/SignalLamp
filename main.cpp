@@ -22,11 +22,11 @@ double Filter_ultrasonic::average_ping_filter() {
     Serial.println(avg_distance_total);
     delay(1000);
     return avg_distance_total;
-  }
 
- private:
-  double ping_value = 0.0;
+
 };
+
+
 
 int main() {
   cout << "Hello world!" << endl;
@@ -57,8 +57,8 @@ double ultrasonic_dist = 0.0;
 double avg_distance_total = 0.0;
 double avg_distance_value = 0.0;
 double ping_value = 0.0;
-for (int i = 0; i < 10; i++) {
-  ping_value = sonar.ping_cm();
+
+
 #define light_red 8
 #define light_green 7
 #define light_yellow 6
