@@ -29,6 +29,6 @@
 *.app
 
 # CMake/QtCreator related files
-CMakeLists.txt.user
 build/*
 build-*
+*.user
