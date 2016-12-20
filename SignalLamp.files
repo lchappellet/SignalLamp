@@ -4,3 +4,7 @@ main.cpp
 main.h
 README.md
 signal_lamp.ino
+light_status.cpp
+light_status.h
+lights_on.cpp
+lights_on.h

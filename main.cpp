@@ -1,4 +1,4 @@
-#include <iostream>
+//#include <iostream>
 
 #include <NewPing.h>
 #include <filter_ultrasonic.h>
@@ -16,6 +16,9 @@ NewPing sonar(TRIGGER_PIN, ECHO_PIN,
 #define light_green 7
 #define light_yellow 6
 
+int previous_color = 0;
+int color = 0;
+
 void setup() {
   Serial.begin(115200);        // Open serial monitor at 115200 baud
   pinMode(light_red, OUTPUT);  // set pin to input
@@ -25,61 +28,32 @@ void setup() {
   digitalWrite(light_green, LOW);
   digitalWrite(light_yellow, HIGH);
 }
-
+/*
 int main() {
   cout << "Hello world!" << endl;
   return 0;
 }
+*/
 void loop() {
-  ultrasonic_dist = 10;
-  previoustime = timenow();
-  time_now = timenow();
-  digitalWrite(light_red, HIGH);
-  digitalWrite(light_green, LOW);
-  digitalWrite(light_yellow, HIGH);
-  Serial.println("green light ON:");
-  avg_distance_value = avg_dist();
-  Serial.print("avg. dist Total: ");
-  Serial.print(avg_distance_value);
+  light_status light;  // object
+  previous_color = color;
+  Filter_ultrasonic ultrasonic_ping;  // object
+  time_passed timed;                  // object
+  lights_on turnON;
 
-  while (avg_dist() <= ultrasonic_dist && avg_dist() > 1) {
-    Serial.println("entered the while loop");
-    time_now = timenow();
-
-    if (time_now - previoustime >= 3000) {
-      digitalWrite(light_red, LOW);
-      digitalWrite(light_green, HIGH);
-      digitalWrite(light_yellow, HIGH);
-      Serial.println("Red light ON : ");
-      Serial.print("The distance is: ");
-      Serial.println(sonar.ping_cm());
-      //            confirmed = 1; //tells us that it has been activated.
-      // here is where you can send a notice saying that the roll tray is
-      // full
-    }
+  color =
+      light.light_color(ultrasonic_ping.average_ping_filter(), timed.time());
+  if (previous_color != color) {
+    timed.time_reset();
   }
+  turnON.set_lights(color);
 
-  delay(50);
-  Serial.print("The distance is: ");
-  Serial.println(sonar.ping_cm());
-}
-//rn on green light when there is no boxes past a certain point.*
- //       Turn on the Yellow light when the boxes are getting close or
+]
+// rn on green light when there is no boxes past a certain point.*
+//       Turn on the Yellow light when the boxes are getting close or
 //    have just gotten less.*
-  //          Turn on the Red light when the boxes have reached a certain hieght.*
-   //         Turn on a small noise when the lights change to red.***** /
-        double timenow() {  // we need to know the time it that the
-                            // ultrasonic sees something within 10cm.
-  double time = millis();
-
-  return time;
-}
-
-// ---------------------------------------------------------------------------
-// Example NewPing library sketch that does a ping about 20 times per second.
-// ---------------------------------------------------------------------------
-
-double ultrasonic_dist = 0.0;
+//          Turn on the Red light when the boxes have reached a certain hieght.*
+//         Turn on a small noise when the lights change to red.***** /
 
 /* Psuedo Code.
  *  I want to have a ultrasonic hooked up to the rolling tray.
@@ -236,4 +210,3 @@ double avg_dist() {
   return avg_distance_total;
 }
 */
-
