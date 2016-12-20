@@ -17,12 +17,13 @@ double Filter_ultrasonic::average_ping_filter() {
     Serial.println(ping_value);
   }
 
-  double avg_distance_total = total_distance_value / count; //calc. Average ping value
+  double avg_distance_total =
+      total_distance_value / count;  // calc. Average ping value
 
   Serial.print("total_distance_value: ");
   Serial.println(total_distance_value);
   Serial.print("Average Total");
   Serial.println(avg_distance_total);
-  delay(1000);
+  delay(500);
   return avg_distance_total;
 };

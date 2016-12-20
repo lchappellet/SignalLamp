@@ -3,6 +3,8 @@
 #include <NewPing.h>
 #include <filter_ultrasonic.h>
 #include <light_status.h>
+#include <lights_on.h>
+#include <time_passed.h>
 
 #define TRIGGER_PIN 10  // Arduino pintiedtotrigger pin ontheultrasonic sensor.
 #define ECHO_PIN 9  // Arduino pin tied to echo pin on the ultrasonic sensor.
@@ -47,8 +49,8 @@ void loop() {
     timed.time_reset();
   }
   turnON.set_lights(color);
+}
 
-]
 // rn on green light when there is no boxes past a certain point.*
 //       Turn on the Yellow light when the boxes are getting close or
 //    have just gotten less.*
