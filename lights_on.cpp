@@ -1,11 +1,11 @@
 #include "lights_on.h"
 
-lights_on::lights_on() {}
+//lights_on::lights_on() {}
 
 void lights_on::set_lights(int lights) {
   enum color { RED, GREEN, YELLOW };
 
-  switch (lights) {
+  /*switch (lights) {
     case RED:
       digitalWrite(light_red, LOW);
       digitalWrite(light_green, HIGH);
@@ -24,4 +24,5 @@ void lights_on::set_lights(int lights) {
 
       break;
   }
+  */
 }

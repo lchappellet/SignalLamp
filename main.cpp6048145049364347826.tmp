@@ -1,5 +1,5 @@
 //#include <iostream>
-/*
+
 #include <NewPing.h>
 #include "filter_ultrasonic.h"
 #include "light_status.h"
@@ -35,7 +35,7 @@ int main() {
   cout << "Hello world!" << endl;
   return 0;
 }
-
+*/
 void loop() {
   light_status light;  // object
   previous_color = color;
@@ -51,8 +51,6 @@ void loop() {
   
   
   switch (color) {
-    Serial.print("light value: ");
-    Serial.println(color);
     //RED
     case 0:
       digitalWrite(light_red, LOW);
@@ -76,7 +74,7 @@ void loop() {
   }
 
 }
-*/
+
 // rn on green light when there is no boxes past a certain point.*
 //       Turn on the Yellow light when the boxes are getting close or
 //    have just gotten less.*

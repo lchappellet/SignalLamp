@@ -5,12 +5,12 @@
 class time_passed
 {
 public:
-    double time();
+    double time(long unsigned int milliseconds);
     void time_reset();
 private:
 
-    double time_now = millis();
-    double previous_time = time_now;
+    double time_now = 50;
+    double previous_time = 0.0;
     double total_time = 0.0;
     double time_total_passed = 0.0;
 

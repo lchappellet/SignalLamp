@@ -1,10 +1,10 @@
 #include "time_passed.h"
 
-time_passed::time_passed() {}
+//time_passed::time_passed() {}
 
-double time_passed::time() {
-  if (time_now < millis()) {
-    time_now = millis();
+double time_passed::time(long unsigned int milliseconds) {
+  if (time_now < milliseconds) {
+    time_now = milliseconds;
   }
 
   time_total_passed = time_now - previous_time;

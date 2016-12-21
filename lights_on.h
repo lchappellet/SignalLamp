@@ -6,7 +6,7 @@ class lights_on
 {
 
 public:
-     void set_lights();
+     void set_lights(int lights);
 };
 
 #endif // LIGHTS_ON_H
