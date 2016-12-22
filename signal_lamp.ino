@@ -64,20 +64,20 @@ void loop() {
     case 0:
       digitalWrite(light_red, LOW);
       digitalWrite(light_green, HIGH);
-      digitalWrite(light_yellow, HIGH);
+      digitalWrite(light_yellow, LOW);
       break;
       //GREEN
     case 1:
       digitalWrite(light_red, HIGH);
       digitalWrite(light_green, LOW);
-      digitalWrite(light_yellow, HIGH);
+      digitalWrite(light_yellow, LOW);
 
       break;
      //YELLOW
     case 2:
-      digitalWrite(light_red, HIGH);
-      digitalWrite(light_green, HIGH);
-      digitalWrite(light_yellow, LOW);
+      digitalWrite(light_red, LOW);
+      digitalWrite(light_green, LOW);
+      digitalWrite(light_yellow, HIGH);
 
       break;
   }
