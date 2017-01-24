@@ -3,15 +3,20 @@
 #ifndef LIGHT_STATUS_H
 #define LIGHT_STATUS_H
 
+enum LightColor {
+  kRed = 0,
+  kYellow,
+  kGreen,
+};
 
-class light_status{
-
+class light_status {
 public:
- double light_color(double sensor_reading, double timer);
+ LightColor set_light_color(double sensor_reading, double timer);
+ LightColor get_light_color() const {
+  return light;
+ }
 private:
- int color_value = 0;
- int light= 0;
-
+ LightColor light = kGreen;
 };
 
 

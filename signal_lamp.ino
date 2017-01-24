@@ -18,17 +18,41 @@ NewPing sonar(TRIGGER_PIN, ECHO_PIN,
 #define light_green 7
 #define light_yellow 6
 
-int previous_color = 0;
-int color = 0;
+// State machine that manages light color transitions.
+light_status light;
+
+// Create a filter for the noisy ultrasonic data.
+Filter_ultrasonic ultrasonic_ping;
+
+// Track the amount of time that has passed.
+time_passed timed;
+
+void set_pins(LightColor color) {
+   switch (color) {
+    case LightColor::kRed:
+      digitalWrite(light_red, LOW);
+      digitalWrite(light_green, HIGH);
+      digitalWrite(light_yellow, LOW);
+      break;
+    case LightColor::kGreen:
+      digitalWrite(light_red, HIGH);
+      digitalWrite(light_green, LOW);
+      digitalWrite(light_yellow, LOW);
+      break;
+    case LightColor::kYellow:
+      digitalWrite(light_red, LOW);
+      digitalWrite(light_green, LOW);
+      digitalWrite(light_yellow, HIGH);
+      break;
+  }
+}
 
 void setup() {
   Serial.begin(115200);        // Open serial monitor at 115200 baud
   pinMode(light_red, OUTPUT);  // set pin to input
   pinMode(light_green, OUTPUT);
   pinMode(light_yellow, OUTPUT);
-  digitalWrite(light_red, HIGH);
-  digitalWrite(light_green, LOW);
-  digitalWrite(light_yellow, HIGH);
+  set_pins(light.get_light_color());
   Serial.println("starting");
 }
 /*
@@ -38,48 +62,25 @@ int main() {
 }
 */
 void loop() {
-  light_status light;  // object
-  previous_color = color;
-  Filter_ultrasonic ultrasonic_ping;  // object
-  time_passed timed;                  // object
-  lights_on turnON;
-
-  color =
-      light.light_color(ultrasonic_ping.average_ping_filter(sonar.ping_cm()), timed.time(millis()));
-      Serial.print("color: ");
-      Serial.println(color);
-      Serial.print("averagePingValue: ");
-      Serial.println(ultrasonic_ping.average_ping_filter(sonar.ping_cm()));
-      delay(300);
+  LightColor previous_color = light.get_light_color();
+  double avg_ping_value = ultrasonic_ping.average_ping_filter(sonar.ping_cm());
+  
+  LightColor new_color =
+      light.set_light_color(avg_ping_value, timed.time(millis()));
+  Serial.print("color: ");
+  Serial.println(new_color);
+  Serial.print("averagePingValue: ");
+  Serial.println(avg_ping_value);
      
-  if (previous_color != color) {
+  if (previous_color != new_color) {
+    Serial.print("Color changed from ");
+    Serial.print(previous_color);
+    Serial.print(" to ");
+    Serial.println(new_color);
+
+    set_pins(new_color);
     timed.time_reset();
   }
   
-  
-  switch (color) {
-    Serial.print("light value: ");
-    Serial.println(color);
-    //RED
-    case 0:
-      digitalWrite(light_red, LOW);
-      digitalWrite(light_green, HIGH);
-      digitalWrite(light_yellow, LOW);
-      break;
-      //GREEN
-    case 1:
-      digitalWrite(light_red, HIGH);
-      digitalWrite(light_green, LOW);
-      digitalWrite(light_yellow, LOW);
-
-      break;
-     //YELLOW
-    case 2:
-      digitalWrite(light_red, LOW);
-      digitalWrite(light_green, LOW);
-      digitalWrite(light_yellow, HIGH);
-
-      break;
-  }
-
+  delay(300);
 }

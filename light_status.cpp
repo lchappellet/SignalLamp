@@ -2,38 +2,21 @@
 
 //light_status::light_status() {}
 
-double light_status::light_color(double sensor_reading, double timer) {
+LightColor light_status::set_light_color(double sensor_reading, double timer) {
   if (timer >= 3000 && sensor_reading <= 15) {
-    // turn on the red light.
-    light = 0;
+    // Turn on the red light.
+    light = LightColor::kRed;
   }
 
   if (timer >= 3000 && sensor_reading >= 60) {
-    // turn on yellow light
-    light = 1;
+    // Turn on green light.
+    light = LightColor::kGreen;
   }
 
   if (timer >= 3000 && sensor_reading > 15 && sensor_reading < 60) {
-    // turn on yellow light
-    light = 2;
+    // Turn on yellow light.
+    light = LightColor::kYellow;
   }
 
   return light;
-  /* enum color { RED, GREEN, YELLOW };
-
-   switch (light) {
-     case RED:
-       std::cout << "red\n";
-       return light;
-       break;
-     case GREEN:
-       std::cout << "green\n";
-       return light;
-       break;
-     case YELLOW:
-       std::cout << "yellow\n";
-       return light;
-       break;
-   }
-   */
 }
