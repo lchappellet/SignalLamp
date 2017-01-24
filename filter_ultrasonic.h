@@ -4,14 +4,10 @@
 
 class Filter_ultrasonic
 {
-
      public:
       double average_ping_filter(double sonar_ping);
      private:
       double ping_value = 0.0;
-
-
-
 };
 
 #endif // FILTER_ULTRASONIC_H
